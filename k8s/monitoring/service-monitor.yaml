@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: devops-app-monitor
+  labels:
+    release: prometheus # This label is usually required for the kube-prometheus-stack to pick it up
+spec:
+  selector:
+    matchLabels:
+      app: devops-app
+  endpoints:
+  - port: http
+    path: /actuator/prometheus
+    interval: 15s
